@@ -5,7 +5,17 @@
   "version": "1.0.0",
   "action": {
     "default_popup": "index.html",
-    "default_icon": "logo.png"
+    "default_icon": {
+      "16": "images/toolbar/icon.png",
+      "24": "images/toolbar/icon.png",
+      "32": "images/toolbar/icon.png"
+    }
+  },
+  "icons": {
+    "16": "images/extensions-page/icon.png",
+    "32": "images/extensions-page/icon.png",
+    "48": "images/extensions-page/icon.png",
+    "128": "images/extensions-page/icon.png"
   },
   "permissions": [
     "activeTab",
