@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "SmartBlock",
+  "description": "An AI-powered website blocker",
+  "version": "1.0.0",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["activeTab"]
+}
