@@ -26,5 +26,11 @@
     "storage",
     "alarms"
   ],
-  "host_permissions": ["<all_urls>"]
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "js": ["src/content/main.tsx"],
+      "matches": ["https://*/*", "http://*/*"]
+    }
+  ]
 }
