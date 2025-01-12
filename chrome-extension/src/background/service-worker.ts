@@ -10,7 +10,7 @@ const BLOCK_RULE = {
     },
   },
   condition: {
-    urlFilter: "*://*.google.com*",
+    urlFilter: `||google.com`,
     resourceTypes: [chrome.declarativeNetRequest.ResourceType.MAIN_FRAME],
   },
 };
@@ -23,5 +23,5 @@ chrome.declarativeNetRequest.updateDynamicRules({
 
 // Store rule in local storage
 chrome.storage.local.set({
-  blocked_sites: ["*://*.google.com*"],
+  blocked_sites: [`||google.com`],
 });
