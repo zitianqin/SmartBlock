@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "SmartBlock",
-  "description": "An AI-powered website blocker",
+  "name": "SmartBlock - Smart Website Blocker",
+  "description": "An AI-powered website blocker that gives you access to certain sites when you need it.",
   "version": "1.0.0",
   "action": {
     "default_popup": "index.html"
