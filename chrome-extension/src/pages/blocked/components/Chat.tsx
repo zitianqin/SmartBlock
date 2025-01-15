@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ChatInput } from "@/components/ui/chat/chat-input";
+import { ChatInput } from "./ui/chat/chat-input";
 import { Button } from "./ui/button";
 import { CornerDownLeft } from "lucide-react";
 import { generateResponse } from "../ai/ai";
-import { Spinner } from "@/components/ui/spinner";
+import { Spinner } from "./ui/spinner";
 
 function checkValidity(response: string): boolean {
   const lowerCaseResponse = response.toLowerCase().replace(/\.$/, "");
@@ -30,11 +30,13 @@ const Chat = () => {
     e.preventDefault();
     console.log("input:", inputText);
 
-    setIsLoading(true); // Show loading bar
+    // Show loading bar
+    setIsLoading(true);
 
     try {
       const answer = await generateResponse(inputText);
-      console.log("output:", answer);
+      console.log("output:");
+      console.log(answer);
 
       if (checkValidity(answer)) {
         setIsInvalid(checkInvalidOrValid(answer));
@@ -42,7 +44,8 @@ const Chat = () => {
     } catch (error) {
       console.error("Error generating response:", error);
     } finally {
-      setIsLoading(false); // Hide loading bar after response
+      // Hide loading bar after response
+      setIsLoading(false);
     }
   };
 

@@ -1,16 +1,10 @@
-import Chat from "@/components/Chat";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import BlockedSite from './BlockedSite.tsx'
 
-const BlockedSite = () => {
-  return (
-    <div className="flex flex-col h-[100dvh] justify-center w-full">
-      <div className="flex flex-col justify-center">
-        <div className="flex items-center justify-center m-2">
-          <p className="text-6xl font-bold text-black">Blocked.</p>
-        </div>
-      </div>
-      <Chat />
-    </div>
-  );
-};
-
-export default BlockedSite;
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <BlockedSite/>
+  </StrictMode>,
+)

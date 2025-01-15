@@ -3,7 +3,7 @@ import { pipeline } from "@huggingface/transformers";
 export async function generateResponse(prompt: string) {
   try {
     // Initialize the pipeline with the model
-    const generator = await pipeline("text2text-generation", "Xenova/LaMini-Flan-T5-783M");
+    const generator = await pipeline("text2text-generation");
 
     // Instructions text
     const instructions = `You are an overseer that blocks websites that are distracting to people wanting to concentrate. 
