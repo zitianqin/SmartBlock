@@ -1,5 +1,10 @@
-function Popup() {
-  return <div className="w-[300px] h-[500px]">This is a popup</div>;
-}
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import Popup from './Popup.tsx'
 
-export default Popup;
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <Popup/>
+  </StrictMode>,
+)

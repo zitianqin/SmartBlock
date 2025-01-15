@@ -1,4 +1,4 @@
-export const redirectExtensionPath = "/#blocked";
+export const redirectExtensionPath = "/src/pages/blocked/index.html";
 
 // Rule to block Google
 const BLOCK_RULE = {

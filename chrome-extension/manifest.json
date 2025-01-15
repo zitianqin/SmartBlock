@@ -4,7 +4,7 @@
   "description": "An AI-powered website blocker that gives you access to certain sites when you need it.",
   "version": "1.0.0",
   "action": {
-    "default_popup": "index.html",
+    "default_popup": "src/pages/popup/index.html",
     "default_icon": {
       "16": "images/toolbar/icon.png",
       "24": "images/toolbar/icon.png",

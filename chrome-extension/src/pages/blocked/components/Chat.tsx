@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ChatInput } from "@/components/ui/chat/chat-input";
+import { ChatInput } from "./ui/chat/chat-input";
 import { Button } from "./ui/button";
 import { CornerDownLeft } from "lucide-react";
-import { generateResponse } from '../ai/ai';
+import { generateResponse } from '../../../ai/ai';
 
 
 function checkValidity(response: string): boolean {
@@ -30,6 +30,7 @@ function checkInvalidOrValid(response: string): boolean {
 const Chat = () => {
   const [inputText, setInputText] = useState('');
   const [response, setResponse] = useState<string | null>(null);
+  console.log(response);
   const [isInvalid, setIsInvalid] = useState(false); // Track if the response is invalid
 
   const handleInputChange = (e: any) => {
