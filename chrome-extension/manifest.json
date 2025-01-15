@@ -3,6 +3,9 @@
   "name": "SmartBlock - Smart Website Blocker",
   "description": "An AI-powered website blocker that gives you access to certain sites when you need it.",
   "version": "1.0.0",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  },
   "action": {
     "default_popup": "src/pages/popup/index.html",
     "default_icon": {
