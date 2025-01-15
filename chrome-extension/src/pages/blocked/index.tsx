@@ -7,8 +7,8 @@ const BlockedSite = () => {
         <div className="flex items-center justify-center m-2">
           <p className="text-6xl font-bold text-black">Blocked.</p>
         </div>
-        <Chat />
       </div>
+      <Chat />
     </div>
   );
 };
