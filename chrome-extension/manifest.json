@@ -39,5 +39,11 @@
       "js": ["src/content/main.tsx"],
       "matches": ["https://*/*", "http://*/*"]
     }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/pages/blocked/index.html"],
+      "matches": ["<all_urls>"]
+    }
   ]
 }

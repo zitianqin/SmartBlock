@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChatInput } from "./ui/chat/chat-input";
 import { Button } from "./ui/button";
 import { CornerDownLeft } from "lucide-react";
@@ -21,10 +21,19 @@ const Chat = () => {
   const [inputText, setInputText] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Track loading state
+  const [blockedSite, setBlockedSite] = useState("");
 
-  const handleInputChange = (e: any) => {
-    setInputText(e.target.value);
-  };
+  useEffect(() => {
+    // Get current tab ID and its blocked URL
+    chrome.tabs.query({ active: true, currentWindow: true }, ([tab]) => {
+      if (tab.id) {
+        chrome.storage.local.get([`blocked_url_${tab.id}`], (result) => {
+          const blockedUrl = result[`blocked_url_${tab.id}`];
+          setBlockedSite(blockedUrl || "");
+        });
+      }
+    });
+  }, []);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -34,19 +43,39 @@ const Chat = () => {
     setIsLoading(true);
 
     try {
-      const answer = await generateResponse(inputText);
+      const answer = await generateResponse(inputText, blockedSite);
       console.log("output:");
       console.log(answer);
 
       if (checkValidity(answer)) {
-        setIsInvalid(checkInvalidOrValid(answer));
+        const isInvalidResponse = checkInvalidOrValid(answer);
+        setIsInvalid(isInvalidResponse);
+
+        console.log("Is invalid response:", isInvalidResponse);
+        console.log("Blocked site:", blockedSite);
+
+        if (!isInvalidResponse && blockedSite) {
+          console.log("Unblocking site:", blockedSite);
+
+          // Store the temporary unblock with expiry time
+          const expiryTime = Date.now() + 60 * 60 * 1000; // Current time + 1 hour
+          await chrome.storage.local.set({
+            [`temp_unblock_${new URL(blockedSite).hostname}`]: expiryTime,
+          });
+
+          // Redirect to the original site
+          window.location.href = blockedSite;
+        }
       }
     } catch (error) {
       console.error("Error generating response:", error);
     } finally {
-      // Hide loading bar after response
       setIsLoading(false);
     }
+  };
+
+  const handleInputChange = (e: any) => {
+    setInputText(e.target.value);
   };
 
   return (
@@ -56,7 +85,10 @@ const Chat = () => {
           Access Denied
         </div>
       ) : (
-        <form className="relative rounded-lg bg-background p-4 m-2" onSubmit={handleSubmit}>
+        <form
+          className="relative rounded-lg bg-background p-4 m-2"
+          onSubmit={handleSubmit}
+        >
           <ChatInput
             placeholder="Why should we unblock this site..."
             className="min-h-12 resize-none rounded-lg bg-background border p-3 shadow-none focus-visible:ring-1"
@@ -65,7 +97,7 @@ const Chat = () => {
           />
           {isLoading && (
             <div className="mt-4">
-              <Spinner size="small" show={true}/>
+              <Spinner size="small" show={true} />
             </div>
           )}
           <div className="flex items-center p-3 pt-0 mt-4">
